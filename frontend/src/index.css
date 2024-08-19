@@ -1,0 +1,7 @@
+@import url(./vars.css);
+
+#root{
+    background-color: var(--body-bg);
+    width: 100vw;
+    height: 100vh;
+}
