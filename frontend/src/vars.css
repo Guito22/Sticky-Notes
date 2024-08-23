@@ -1,7 +1,19 @@
 :root{
-    --body-bg:white;
+    --body-bg:whitesmoke;
+    --board-bg:rgba(112, 128, 144, 0.294);
+    --body-color:black;
+    --list-name-color:black;
+    --popover-bg:#cccccc;
+    --input-bg:whitesmoke;
+    --input-color:black;
 }
 
 [data-theme="dark"]{
     --body-bg:#252525;
+    --board-bg:#111;
+    --body-color:whitesmoke;
+    --list-name-color:whitesmoke;
+    --popover-bg:#383737;
+    --input-bg:#383737;
+    --input-color:whitesmoke;
 }

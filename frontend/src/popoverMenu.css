@@ -1,0 +1,27 @@
+.popper{
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: var(--popover-bg) !important;
+    height: 4rem;
+
+}
+.popperBtn{
+    background-color: var(--popover-bg) !important;
+    width: 15vw;
+    height: 4rem;
+    border-radius: 0 !important;
+    color: var(--body-color) !important;
+    display: flex !important;
+    justify-content: left !important;
+    align-items: center ;
+    
+
+    p{
+        margin: 0;
+    }
+}
+
+.popperIcon{
+    color: rgb(115, 114, 114);
+    margin:1rem;
+}
