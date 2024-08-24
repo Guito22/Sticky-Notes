@@ -23,7 +23,7 @@ export default function ListModalForm({openModal,SetOpenModal}){
                 <h3 className="m-4">New List</h3>
                 <label htmlFor="title">Title:</label>
                 
-                <input type="text" name="title" id="title"/>
+                <input autoFocus type="text" name="title" id="title"/>
                 <p>Icon:</p>
                 <div id="iconsDiv">
                     {icons.map((i,index)=>{

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function NoteModal({open,SetOpen}){
     const [colorIndex,SetColorIndex] = useState(0)
-    const colors = ["#373737","red","blue","orange","green"]
+    const colors = ["#373737","tomato","blue","orange","green"]
     return(
         <Modal
         className="modal"
@@ -15,7 +15,7 @@ export default function NoteModal({open,SetOpen}){
             <Box className="modalForm">
                 
                 <h3 className="m-4">New Note</h3>
-                <textarea placeholder="Write your note..." id="contentNote"/>
+                <textarea autoFocus placeholder="Write your note..." id="contentNote"/>
                 <div className="d-flex">
                     {colors.map((i,index)=>{
                         return(

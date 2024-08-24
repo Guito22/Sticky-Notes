@@ -1,9 +1,13 @@
 import { useState } from "react"
-import PlaceHolder from "./PlaceHolder"
+import Note from "./Note"
 import "./board.css"
+import ExpandedNote from "./ExpandedNote"
+import {notes} from "./notes"
+import { ArrowBack, ArrowBackSharp } from "@mui/icons-material"
 
 export default function Board(){
     const [draggedIndex,SetDraggedIndex] = useState(null)
+    const [expandedIndex,SetExpandedIndex] = useState(null)
     const dragStartFunction = (index)=>{
         SetDraggedIndex(index)
     }
@@ -17,31 +21,34 @@ export default function Board(){
         children[draggedIndex].innerHTML = children[index].innerHTML
         children[index].innerHTML = aux
 
-
     }
     const clickFunction = (index)=>{
-        const element = document.querySelector("main").children[index]
-        // element.style.width = "90%"
-        element.style.transition = "0.2s all ease-in"
-        element.classList.remove("h-50","col-md-5")
-        element.classList.add("col-11")
-        element.style.height = "80vh"
+
+        SetExpandedIndex(index)
     }
     return(
         <>
             <main>
-                {Array(6).fill("").map((i,index)=>{
-                    return(
-                        <PlaceHolder 
-                        index={index} 
-                        key={index}
-                        dragStartFunction={dragStartFunction}
-                        dragEndFunction={dragEndFunction}
-                        dropFunction={dropFunction}
-                        clickFunction={clickFunction}
-                        />
-                    )
-                })}
+                {expandedIndex!==null ? 
+                    <ExpandedNote 
+                    info={notes[expandedIndex]}
+                    SetExpandedIndex={SetExpandedIndex}/>    
+                    :          
+                    notes.map((i,index)=>{
+                        
+                        return(
+                            <Note
+                            index={index} 
+                            key={index}
+                            info={i}
+                            dragStartFunction={dragStartFunction}
+                            dragEndFunction={dragEndFunction}
+                            dropFunction={dropFunction}
+                            clickFunction={clickFunction}
+                            />
+                        )
+                    })}
+                
             </main>
         </>
     )

@@ -3,7 +3,6 @@ import "./popoverMenu.css"
 
 export default function PopoverMenu({options}){
     const {open,SetOpen,anchorEl,anchorOrigin,content} = options
-    console.log(document.querySelector(".test"));
 
     return(
             <Popover
