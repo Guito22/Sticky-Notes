@@ -1,4 +1,4 @@
-#homeNav{
+#boardNav{
     height: 10vh;
     display: flex;
     align-items: center;
@@ -10,12 +10,12 @@
     background-color: gray;
 }
 
-#homeNav h2{
+#boardNav h2{
     margin-left: 4rem;
 }
 
 @media screen and (max-width:992px){
-    #homeNav h2{
+    #boardNav h2{
         margin-left: 0;
     }
 }
@@ -55,10 +55,10 @@
     height: 300px;
     margin: 2rem;
     font-size: 1.5rem;
-    background-color: var(--input-bg);
-    color: var(--input-color);
+    padding: 0.5rem;
+    color: white;
     &::placeholder{
-        color: gray;
+        color: lightgray;
     }
 }
 @media screen and (max-width:992px) {

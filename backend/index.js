@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser');
 
 const connectDB = require("./db");
 
+const userRoute = require("./Routes/user")
+
 
 // First, parse incoming JSON and URL-encoded data
 app.use(express.json());
@@ -26,6 +28,8 @@ app.use(session({
 
 // CORS middleware setup
 app.use(cors({ origin: true, credentials: true }));
+
+app.use("/",userRoute)
 
 app.listen(port,()=>{
     console.log(`LISTENING TO PORT ${port}`);

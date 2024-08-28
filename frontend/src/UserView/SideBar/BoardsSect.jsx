@@ -1,13 +1,13 @@
 import { useState } from "react"
-import ListBtn from "./ListBtn"
-export default function ListsSect(){
+import BoardBtn from "./BoardBtn"
+export default function BoardsSect(){
     const [selected,SetSelected] = useState(0)
 
     return(
         <div id="listsDiv">
             {Array(10).fill("").map((i,index)=>
                 
-                <ListBtn 
+                <BoardBtn 
                 key={index}
                 index={index}
                 selected={selected}

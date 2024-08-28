@@ -2,8 +2,8 @@ import { Button } from "@mui/material"
 import "./sideBar.css"
 import ProfileSect from "./ProfileSect"
 import ThemeSect from "./ThemeSect"
-import ListsSect from "./ListsSect"
-import ListModalForm from "./ListModalForm"
+import BoardsSect from "./BoardsSect"
+import BoardModalForm from "./BoardModalForm"
 import { useState } from "react"
 export default function SideBar(){
     const [openModal,SetOpenModal] = useState(false)
@@ -14,11 +14,11 @@ export default function SideBar(){
 
             <Button id="addListBtn" 
             onClick={()=>SetOpenModal(true)}>
-                + Add List
+                + Add Board
             </Button>
-            <ListModalForm openModal={openModal} SetOpenModal={SetOpenModal}/>
+            <BoardModalForm openModal={openModal} SetOpenModal={SetOpenModal}/>
 
-            <ListsSect/>
+            <BoardsSect/>
 
             <ThemeSect/>
 

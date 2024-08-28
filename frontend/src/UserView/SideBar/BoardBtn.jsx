@@ -2,7 +2,7 @@ import { Delete, Edit, ListAlt} from "@mui/icons-material"
 import { useState } from "react"
 import PopoverMenu from "../../PopoverMenu"
 
-export default function ListBtn({index,selected,SetSelected}){
+export default function BoardBtn({index,selected,SetSelected}){
     const [open,SetOpen] = useState(false)
     const popoverOptions = {
         open,
@@ -10,8 +10,8 @@ export default function ListBtn({index,selected,SetSelected}){
         anchorEl:document.querySelectorAll(".listBtn")[index],
         anchorOrigin:{horizontal:0,vertical:"bottom"},
         content:[
-            {icon:<Edit/>,text:"Edit List"},
-            {icon:<Delete/>,text:"Delete List"}
+            {icon:<Edit/>,text:"Edit Board"},
+            {icon:<Delete/>,text:"Delete Board"}
 
         ]
     }
@@ -27,7 +27,7 @@ export default function ListBtn({index,selected,SetSelected}){
             onClick={()=>{SetSelected(index)}}>
                 
                 <ListAlt style={{margin:"1rem"}}/>
-                <p>List Number {index+1}</p>
+                <p>Board Number {index+1}</p>
             </div>
             <PopoverMenu options={popoverOptions}/>
         </>

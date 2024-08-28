@@ -5,7 +5,7 @@ const userSchema = new Schema({
     name:{
         type:String,
         required:true,
-        maxlenght: [40,"Name cannot be longer than 40 characters"]
+        maxlenght: [20,"Name cannot be longer than 40 characters"]
     },
     email:{
         type:String,
@@ -16,10 +16,14 @@ const userSchema = new Schema({
         required:true,
 
     },
-    noteLists:[{type:Schema.Types.ObjectId,ref:"list"}],
+    boards:[{type:Schema.Types.ObjectId,ref:"board"}],
     theme:{
         type:String,
         enum:["light","dark"]
+    },
+    color:{
+        type:String,
+        enum:["turquoise","goldenrod","fuchsia","salmon","olive"]
     }
 })
 

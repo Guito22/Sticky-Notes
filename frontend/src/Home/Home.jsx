@@ -1,24 +1,23 @@
-import Board from "./Board/Board"
-import NavBar from "./NavBar/NavBar"
-import SideBar from "./SideBar/SideBar"
+import { Link } from "react-router-dom"
+import "./home.css"
 
-const sectionStyle = {
-    display:"flex",
-    flexDirection:"column",
-    flex:"12",
-    height:"100vh"
-}
 export default function Home(){
-
     return(
-        <>
-        
-                <SideBar/>
-            <section style={sectionStyle}>
-            <NavBar/>
-                <Board/>
-            </section>
-            
-        </>
+
+        <div id="homeNote">
+            <h3 className="my-5">
+            With this react app you can create sticky notes to store information
+            </h3>
+            <div className="d-flex gap-3">
+
+                <Link to="/login" className="btn btn-primary">Log in</Link>
+                <Link className="btn btn-success">Sign Up</Link>
+            </div>
+
+            <div id="homeFold">
+            </div>
+
+        </div>
+
     )
 }

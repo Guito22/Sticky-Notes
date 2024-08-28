@@ -27,13 +27,13 @@ export const notes = [
     },
     {
         content:"This is a test sdgf",
-        color:"red",
+        color:"#373737",
         date:new Date().toDateString(),
         important:false
     },
     {
         content:"This is a test gsdfg",
-        color:"red",
+        color:"blue",
         date:new Date().toDateString(),
         important:true
     },

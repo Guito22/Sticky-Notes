@@ -12,3 +12,7 @@
     height: 100vh;
     transition: 0.1s background-color ease-in,0.1s color ease-in;
 }
+
+textarea:focus, input:focus{
+    outline: none !important;
+}

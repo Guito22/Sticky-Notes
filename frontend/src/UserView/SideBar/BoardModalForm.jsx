@@ -1,7 +1,7 @@
 import { Book, CalendarMonth, Home, Lightbulb, RocketLaunch } from "@mui/icons-material"
 import { Modal,Box, IconButton } from "@mui/material"
 import { useState } from "react"
-export default function ListModalForm({openModal,SetOpenModal}){
+export default function BoardModalForm({openModal,SetOpenModal}){
     const [iconIndex,SetIconIndex] = useState(0)
     const icons = [
         <Book style={{color:"cyan"}}/>,
@@ -20,7 +20,7 @@ export default function ListModalForm({openModal,SetOpenModal}){
         aria-describedby="modal-modal-description">
       
             <Box className="modalForm">
-                <h3 className="m-4">New List</h3>
+                <h3 className="m-4">New Board</h3>
                 <label htmlFor="title">Title:</label>
                 
                 <input autoFocus type="text" name="title" id="title"/>

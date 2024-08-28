@@ -1,0 +1,67 @@
+
+#authDiv{
+    display: flex;
+    width: 50vw;
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;   
+
+}
+#authLock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+#authForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    overflow: auto;
+}
+
+#authTitle{
+    font-weight: bolder;
+    color: black;
+    margin-bottom: 1rem;
+}
+.authInput{
+    width: 50% !important;
+    margin: 1rem !important;
+}
+
+#formLink{
+    text-decoration: none;
+}
+#alertDiv{
+    max-height: 4rem;
+    max-width: 90%;
+    margin-bottom: 1rem;
+}
+#formAlert{
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width:768px){
+    #authForm,#authLock{
+        width: 100%;
+    }
+    #authDiv{
+        min-height: 75vh;
+        width: 80vw;
+        flex-direction: column;
+
+    }
+    #formAlert{
+        padding: 0.4rem 0.2rem !important;
+    }
+
+
+    .authInput{
+        width: 50vw !important;
+    }
+}

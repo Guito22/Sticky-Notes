@@ -20,7 +20,7 @@ export default function NavBar(){
 
   }
     return (
-        <nav id="homeNav">
+        <nav id="boardNav">
           <div className="navbar d-lg-none m-3">
             <button className="navbar-toggler" id="toggleBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideBar">
               <span className="navbar-toggler-icon"></span>

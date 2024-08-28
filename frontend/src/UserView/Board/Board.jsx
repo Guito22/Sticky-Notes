@@ -28,7 +28,7 @@ export default function Board(){
     }
     return(
         <>
-            <main>
+            <main id="board">
                 {expandedIndex!==null ? 
                     <ExpandedNote 
                     info={notes[expandedIndex]}

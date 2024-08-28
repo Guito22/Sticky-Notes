@@ -1,6 +1,6 @@
 :root{
     --body-bg:whitesmoke;
-    --board-bg:rgba(112, 128, 144, 0.294);
+    --board-bg:rgb(188, 185, 185);
     --body-color:black;
     --list-name-color:black;
     --popover-bg:#cccccc;

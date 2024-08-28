@@ -11,7 +11,7 @@ export default function ExpandedNote({SetExpandedIndex,info}){
                 <ArrowBack/>
             </IconButton>
             
-            <textarea style={{backgroundColor:info.color,color:"white"}} name="" id="" value={info.content}></textarea>
+            <textarea autoFocus style={{backgroundColor:info.color,color:"white"}} name="" id="" value={info.content}></textarea>
             <div className="d-flex">
                     {colors.map((i,index)=>{
                         return(
@@ -33,8 +33,8 @@ export default function ExpandedNote({SetExpandedIndex,info}){
                 </IconButton>
                     <IconButton className="m-3">
                     {info.important ?
-                        <StarRounded style={{color:"goldenrod",fontSize:"2rem"}}/>:
-                        <StarOutlineRounded style={{color:"goldenrod",fontSize:"2rem"}}/>
+                        <StarRounded className="star"/>:
+                        <StarOutlineRounded className="star"/>
                     }
                     </IconButton>
             </div>

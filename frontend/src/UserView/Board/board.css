@@ -1,5 +1,5 @@
 
-main{
+#board{
     flex: 1;
     background-color: var(--board-bg);
     padding: 1rem;
@@ -11,14 +11,13 @@ main{
     -ms-overflow-style: none;
     position: relative;
     scrollbar-width: none;
-    &::--webkit-scrollbar{
-        display: none;
-    }
+
 }
 
 .card{
     margin: 2%;
-
+    position: relative;
+    border: none !important;
 }
 
 #returnBtn{
@@ -42,15 +41,35 @@ main{
         resize: none;
         border-radius: 10px;
         padding: 0.5rem;
+        font-size: 2rem;
     }
 }
 
 @media screen and (max-width:768px){
     #expandedNote{
         height: 60%;
-
+        textarea{
+            font-size: 1rem;
+        }
     }
+
     #returnBtn{
         left:0.5rem
     }
+}
+
+.star{
+    color: goldenrod;
+    font-size: 2rem !important;
+}
+
+.fold{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: 25px solid transparent;
+    border-top-left-radius: 10px;
+    border-bottom-color: var(--board-bg);
+    border-right-color: var(--board-bg);
+    opacity: 1;
 }
