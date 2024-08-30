@@ -13,8 +13,9 @@ export default function PopoverMenu({options}){
             >
                 {content.map((i,index)=>{
                     return(
-                        <Popper key={index} component={"div"} className="popper">
-                            <Button className="popperBtn">
+                        <Popper key={index} component={"div"} className="popper" open={true}>
+                            <Button className="popperBtn"
+                            onClick={i.action}>
 
                                     {i.icon && 
                                     <span className="popperIcon">

@@ -1,21 +1,47 @@
 import { IconButton,Button} from "@mui/material";
-import {Brush, Delete, MoreHoriz} from "@mui/icons-material";
-import { useState } from "react";
+import {Brush, Delete, Edit, MoreHoriz} from "@mui/icons-material";
+import { useContext, useState } from "react";
 import NoteModal from "./NoteModal";
 import PopoverMenu from "../../PopoverMenu"
 import "./navBar.css"
+import { userContext } from "../Context";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function NavBar(){
+  const {id} = useParams()
   const [open,SetOpen] = useState(false)
   const [openMenu,SetOpenMenu] = useState(false)
+  const {user,boardIndex,SetBoardIndex,SetOpenEditModal,loadData} = useContext(userContext)
   const popoverOptions = {
     open:openMenu,
     SetOpen:SetOpenMenu,
     anchorEl:document.querySelector("#moreBtn"),
     anchorOrigin:{horizontal:"left",vertical:"top"},
     content:[
-      {icon:<Brush/>,text:"Change color"},
-      {icon:<Delete/>, text:"Delete List"}
+      {
+        icon:<Edit/>,
+        text:"Edit Board",
+        action:()=>{
+          SetOpenEditModal(true)
+          SetOpenMenu(false)
+
+        }
+      },
+      {
+        icon:<Delete/>, 
+        text:"Delete Board",
+        action: async()=>{
+          const res = await axios.delete(`http://localhost:3000/${id}/deleteBoard/${user.boards[boardIndex]._id}`,{withCredentials:true})
+          if(res.data==="success"){
+              if(boardIndex===(user.boards.length)-1){
+                SetBoardIndex(boardIndex-1)
+              }
+              loadData()
+              SetOpenMenu(false)
+          }
+      }
+      }
     ]
 
   }
@@ -27,7 +53,7 @@ export default function NavBar(){
             </button>
           </div>
 
-          <h2>Some Title</h2>
+          <h2>{user.boards && user.boards[boardIndex].title}</h2>
           
           <Button id="addBtn" onClick={()=>{SetOpen(true)}}>+ Add Note</Button>
           <IconButton id="moreBtn" onClick={()=>{SetOpenMenu(true)}}>

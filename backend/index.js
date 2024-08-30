@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const connectDB = require("./db");
 
 const userRoute = require("./Routes/user")
+const boardRoute = require("./Routes/board")
 
 
 // First, parse incoming JSON and URL-encoded data
@@ -30,6 +31,7 @@ app.use(session({
 app.use(cors({ origin: true, credentials: true }));
 
 app.use("/",userRoute)
+app.use("/",boardRoute)
 
 app.listen(port,()=>{
     console.log(`LISTENING TO PORT ${port}`);

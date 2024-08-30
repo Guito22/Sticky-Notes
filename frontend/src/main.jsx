@@ -11,6 +11,7 @@ import Layout from './Layout/Layout';
 import Login from './Authentication/Login';
 import SignUp from './Authentication/SignUp';
 import Edit from './Authentication/Edit';
+import ErrorPage from './ErrorPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -21,10 +22,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
         <Route path='/edit/:id' element={<Edit/>}></Route>
+        <Route path='/*' element={<ErrorPage/>}></Route>
 
       </Route>
-      <Route path='user/:id' element={<UserView/>}></Route>
-      
+      <Route path='/user/:id' element={<UserView/>}></Route>
     </Routes>
-  </BrowserRouter>,
+  </BrowserRouter>
 )

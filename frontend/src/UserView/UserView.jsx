@@ -1,7 +1,12 @@
+import axios from "axios"
 import Board from "./Board/Board"
 import NavBar from "./NavBar/NavBar"
 import SideBar from "./SideBar/SideBar"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { userContext } from "./Context"
+
+import EditBoardModal from "./EditBoardModal"
 const sectionStyle = {
     display:"flex",
     flexDirection:"column",
@@ -9,27 +14,50 @@ const sectionStyle = {
     height:"100vh"
 }
 export default function UserView(){
-    useEffect(()=>{
-        const theme = localStorage.getItem("data-theme")
-        const circle = document.querySelector("#circle")
-        if(theme==="dark"){
-                circle.style.transform = "translateX(2rem)"
+    const navigate = useNavigate()
+    const {id} = useParams()
+    const [user,SetUser] = useState({})
+    const [boardIndex,SetBoardIndex] = useState(0)
+    const [openEditModal,SetOpenEditModal] = useState(false)
+    const [load,SetLoad] = useState(false)
+    const loadData = ()=>{
+        SetLoad(!load)
+    }
+
+    const getUser = async()=>{
+        const res = (await axios.get(`http://localhost:3000/${id}`,{withCredentials:true})).data
+        if(res==="not logged"){
+            navigate("/")
         }
-        
-        document.body.setAttribute("data-theme",
-            theme ? theme : "light")
-        localStorage.setItem("data-theme",
-            document.body.getAttribute("data-theme"))
-    },[])
+        else{
+            SetUser(res)
+            const circle = document.querySelector("#circle")
+            if(res.theme==="dark"){
+                    circle.style.transform = "translateX(2rem)"
+            }
+            
+            document.body.setAttribute("data-theme",res.theme)
+
+        }
+    }
+
+
+    useEffect(()=>{
+        getUser()
+    },[load])
+
+
     return(
-        <>
+        <userContext.Provider value={{
+            user,loadData,boardIndex,SetBoardIndex,openEditModal,SetOpenEditModal
+            }}>
         
             <SideBar/>
             <section style={sectionStyle}>
             <NavBar/>
                 <Board/>
             </section>
-            
-        </>
+            <EditBoardModal/>
+        </userContext.Provider>
     )
 }

@@ -47,6 +47,7 @@ export default function Edit(){
             }
         }
         const res = await axios.patch(`http://localhost:3000/edit/${id}`,formData,{withCredentials:true})
+        
         if(res.data!=="Success"){
             SetMessage(res.data)
         }
@@ -59,6 +60,10 @@ export default function Edit(){
         axios.get(`http://localhost:3000/${id}`,{withCredentials:true}).
         then((res)=>{
             const {name,email} = res.data
+            if(res.data==="not logged"){
+                navigate("/")
+            }
+            
             SetFormData({...formData,name,email})
             
         })

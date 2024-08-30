@@ -3,6 +3,8 @@ const router = express.Router()
 const bcrypt = require('bcrypt');
 
 const User = require("../Models/User")
+const Board = require("../Models/Board")
+const Note = require("../Models/Note")
 const isLogged = require("../loginVerification")
 
 router.get("/:userId",isLogged,async(req,res)=>{
@@ -10,7 +12,7 @@ router.get("/:userId",isLogged,async(req,res)=>{
 
         const {userId} = req.params
         if(req.session.user===userId){
-            const user = await User.findById(userId)
+            const user = await User.findById(userId).populate("boards")
             res.send(user)
         }
         else{
@@ -45,7 +47,9 @@ router.post("/login", async (req,res)=>{
 
 //sign up route
 router.post("/signup", async (req,res)=>{
-    const {name,email,password,theme,color} = req.body
+    const {name,email,password} = req.body
+    const colors = ["turquoise","goldenrod","salmon","pink","green","purple"]
+    const color = colors[Math.floor(Math.random()*colors.length)]
     const existEmail = await User.findOne({email})
     if(existEmail){
         res.send(false)
@@ -54,25 +58,46 @@ router.post("/signup", async (req,res)=>{
         //to encrypt password
         const salt = await bcrypt.genSalt(12);
         const hash = await bcrypt.hash(password, salt);
-        const newUser = new User({name,email,password:hash,theme,color})
+        const newUser = new User({name,email,password:hash,theme:"light",color})
+        
+        const firstBoard = new Board({
+            icon:"home",
+            title:"My first board",
+            user:newUser
+        })
+        
+        const firstNote = new Note({
+            content:"My first note",
+            color:"blue",
+            important:true,
+            creationDate: new Date().toISOString(),
+            board:firstBoard
+        })
+        await firstNote.save()
+        firstBoard.notes.push(firstNote)
+
+        await firstBoard.save()
+        newUser.boards.push(firstBoard)
+        
         await newUser.save()
         res.send(true)
     }
 })
 //logout route
-router.post("/:userId/logout", async (req,res)=>{
-    const {userId} = req.params
-    if(req.session.user){
-        const isId = userId==req.session.user
-        if(isId){
-
-            req.session.destroy((err)=>{
-    
-            })
-        }
-    
+router.post("/:userId/logout",isLogged, async (req,res)=>{
+    try{
+        
+        const {userId} = req.params
+            
+        req.session.destroy((err)=>{
+            
+        })
+            
+        res.send("success")
     }
-    res.send("whatever")
+    catch (e){
+        res.send(e)
+    }
 })
 router.patch("/edit/:userId",isLogged,async(req,res)=>{
     try{
@@ -90,9 +115,9 @@ router.patch("/edit/:userId",isLogged,async(req,res)=>{
 
     }
     catch(e){
-        console.log(e);
         res.send(e)
     }
 })
+
 
 module.exports = router

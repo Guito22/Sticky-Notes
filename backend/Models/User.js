@@ -5,7 +5,7 @@ const userSchema = new Schema({
     name:{
         type:String,
         required:true,
-        maxlenght: [20,"Name cannot be longer than 40 characters"]
+        maxlenght: [20,"Name cannot be longer than 20 characters"]
     },
     email:{
         type:String,
@@ -16,17 +16,17 @@ const userSchema = new Schema({
         required:true,
 
     },
-    boards:[{type:Schema.Types.ObjectId,ref:"board"}],
     theme:{
         type:String,
         enum:["light","dark"]
     },
     color:{
         type:String,
-        enum:["turquoise","goldenrod","fuchsia","salmon","olive"]
-    }
+        enum:["turquoise","goldenrod","salmon","pink","green","purple"]
+    },
+    boards:[{type:Schema.Types.ObjectId,ref:"Board",required:true}]
 })
 
-const User = mongoose.model("user",userSchema)
+const User = mongoose.model("User",userSchema)
 
 module.exports = User

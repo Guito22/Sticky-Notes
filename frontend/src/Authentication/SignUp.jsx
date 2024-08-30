@@ -54,7 +54,8 @@ export default function SignUp(){
                 return  
             }
         }
-        const res = await axios.post("http://localhost:3000/signup",{...formData,color:"turquoise",theme:"dark"},{withCredentials:true})
+        const res = await axios.post("http://localhost:3000/signup",
+            formData,{withCredentials:true})
         if(!res.data){
             SetMessage("That email is already registered")
         }

@@ -1,21 +1,21 @@
 import { Book, CalendarMonth, Home, Lightbulb, RocketLaunch } from "@mui/icons-material"
 import { Modal,Box, IconButton, Button } from "@mui/material"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-import { userContext } from "../Context"
+import { userContext } from "./Context"
 
-export default function BoardModalForm({openModal,SetOpenModal}){
+export default function EditBoardModal(){
     const {id} = useParams()
-    const [iconIndex,SetIconIndex] = useState(0)
+    const {user,loadData,boardIndex,openEditModal,SetOpenEditModal} = useContext(userContext)
     const [title,SetTitle] = useState("")
-    const {user,loadData,SetBoardIndex} = useContext(userContext)
     const updateTitle = (e)=>{
         if(e.target.value.length<=30){
 
             SetTitle(e.target.value)
         }
     }
+    const [iconIndex,SetIconIndex] = useState(0)
     const iconList = [
         {
             name:"home",
@@ -38,20 +38,27 @@ export default function BoardModalForm({openModal,SetOpenModal}){
             icon:<CalendarMonth style={{color:"salmon"}}/>
         }
     ]
-
-    const createBoard = async()=>{
+    //this effect allows to get user values everytime the modal is opened
+    useEffect(()=>{
+        
+        if(user.boards){
+            SetTitle(user.boards[boardIndex].title)
+            const boardIconIndex = iconList.findIndex(i=>{
+                return i.name===user.boards[boardIndex].icon
+            })
+            SetIconIndex(boardIconIndex)
+        } 
+            
+    },[openEditModal])
+    
+    const updateBoard = async()=>{
         if(title){
-            const res = await axios.post(`http://localhost:3000/${id}/newBoard`,
+            const res = await axios.patch(`http://localhost:3000/${id}/editBoard/${user.boards[boardIndex]._id}`,
                 {title,icon:iconList[iconIndex].name},{withCredentials:true})
                 if(res.data==="success"){
                     
-                    SetIconIndex(0)
-                    SetOpenModal(false)
                     loadData()
-                    setTimeout(()=>{
-
-                        SetBoardIndex(user.boards.length)
-                    },100)
+                    SetOpenEditModal(false)
                 }
         }
     }
@@ -59,16 +66,15 @@ export default function BoardModalForm({openModal,SetOpenModal}){
     return(
         <Modal
         className="modal"
-        open={openModal}
+        open={openEditModal}
         onClose={()=>{
-            SetIconIndex(0)
-            SetOpenModal(false)
+            SetOpenEditModal(false)
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
       
             <Box className="modalForm">
-                <h3 className="m-4">New Board</h3>
+                <h3 className="m-4">Edit Board</h3>
 
                 <label htmlFor="title">Title:</label>
                 
@@ -91,18 +97,18 @@ export default function BoardModalForm({openModal,SetOpenModal}){
 
                 <div className="m-3 d-flex justify-content-end gap-2">
                     <Button 
-                    color="success"
+                    color="secondary"
                     style={{textTransform:"none"}}
-                    onClick={createBoard}
+                    onClick={updateBoard}
                     variant="contained"
-                    >Create
+                    >Update
                     </Button>
                     <Button 
                     
                     style={{textTransform:"none",backgroundColor:"slategray"}}
                     onClick={()=>{
                         SetIconIndex(0)
-                        SetOpenModal(false)}}
+                        SetOpenEditModal(false)}}
                     variant="contained"
                     >Cancel</Button>
                 </div>

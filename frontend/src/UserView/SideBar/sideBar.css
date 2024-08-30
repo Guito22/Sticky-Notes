@@ -36,8 +36,8 @@
 #profileCircle{
     width: 40px;
     height: 40px;
-    background-color: turquoise;
     border-radius: 100px;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,7 @@
 }
 
 #listsDiv{
-    max-height: 75%;
+    height: 75%;
     overflow: auto;
 }
 #listsDiv div{
@@ -70,10 +70,13 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    
 }
 #listsDiv p{
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
 }
 
 #selected{

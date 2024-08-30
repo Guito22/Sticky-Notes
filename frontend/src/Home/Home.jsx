@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import "./home.css"
+import { Button } from "@mui/material"
 
 export default function Home(){
     return(
@@ -10,8 +11,23 @@ export default function Home(){
             </h3>
             <div className="d-flex gap-3">
 
-                <Link to="/login" className="btn btn-primary">Log in</Link>
-                <Link className="btn btn-success">Sign Up</Link>
+                <Link to="/login">
+                    <Button 
+                    style={{textTransform:"none",fontSize:"1rem"}}
+                    color="primary" 
+                    variant="contained">
+                        Log in
+                    </Button>
+                </Link>
+
+                <Link to="/signup">
+                    <Button 
+                    style={{textTransform:"none",fontSize:"1rem"}}
+                    color="success" 
+                    variant="contained">
+                        Sign up
+                    </Button>
+                </Link>
             </div>
 
             <div id="homeFold">

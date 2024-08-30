@@ -1,4 +1,4 @@
-import { Modal,Box, Checkbox } from "@mui/material";
+import { Modal,Box, Checkbox, Button } from "@mui/material";
 import { useState } from "react";
 
 export default function NoteModal({open,SetOpen}){
@@ -26,6 +26,7 @@ export default function NoteModal({open,SetOpen}){
                     {colors.map((i,index)=>{
                         return(
                             <div 
+                            key={index}
                             onClick={()=>SetColorIndex(index)}
                             id={colorIndex===index ? "selectedColor" : ""}
                             className="colorCircle bg-gradient" 
@@ -42,14 +43,20 @@ export default function NoteModal({open,SetOpen}){
                 </div>
 
                 <div className="m-3 d-flex justify-content-end gap-2">
-                    <button  
+                    <Button 
+                    color="success"
+                    style={{textTransform:"none"}}
+                    onClick={()=>SetOpenl(false)}
+                    variant="contained"
+                    >Create
+                    </Button>
+                    
+                    <Button 
+                    style={{textTransform:"none",backgroundColor:"slategray"}}
                     onClick={()=>SetOpen(false)}
-                    className="btn btn-success"
-                    >Create</button>
-                    <button 
-                    onClick={()=>SetOpen(false)}
-                    className="btn btn-secondary"
-                    >Cancel</button>
+                    variant="contained"
+                    >Cancel
+                    </Button>
                 </div>
 
             </Box>

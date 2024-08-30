@@ -9,6 +9,7 @@ const noteSchema = new Schema({
     },
     color:{
         type: String,
+        enum:["#373737","tomato","blue","orangered","green"],
         required:true,
     },
     important:{
@@ -22,9 +23,10 @@ const noteSchema = new Schema({
     editionDate:{
         type:Date,
         
-    }
+    },
+
 })
 
-const Note = mongoose.model("note",userSchema)
+const Note = mongoose.model("Note",noteSchema)
 
 module.exports = Note

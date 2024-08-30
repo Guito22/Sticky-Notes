@@ -9,11 +9,13 @@ export default function SideBar(){
     const [openModal,SetOpenModal] = useState(false)
 
     return(
-        <aside id="sideBar" className="offcanvas-lg offcanvas-start" tabindex="-1">
+        <aside id="sideBar" className="offcanvas-lg offcanvas-start" tabIndex="-1">
             <ProfileSect/>
-
-            <Button id="addListBtn" 
-            onClick={()=>SetOpenModal(true)}>
+            
+            <Button id="addListBtn" data-bs-dismiss="offcanvas" data-bs-target="#sideBar"
+            onClick={()=>{
+                SetOpenModal(true)
+                }}>
                 + Add Board
             </Button>
             <BoardModalForm openModal={openModal} SetOpenModal={SetOpenModal}/>

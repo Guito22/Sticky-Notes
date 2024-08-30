@@ -40,7 +40,7 @@ export default function Login(){
             SetMessage("Email or password is invalid")
         }
         else{
-            navigate("/user/123")
+            navigate(`/user/${res.data}`)
         }
     }
 
