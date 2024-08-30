@@ -118,6 +118,17 @@ router.patch("/edit/:userId",isLogged,async(req,res)=>{
         res.send(e)
     }
 })
-
+router.patch("/:userId/toggleTheme",isLogged,async(req,res)=>{
+    try{
+        const {userId} = req.params
+        const user = await User.findById(userId)
+        user.theme = user.theme === "dark" ? "light" : "dark"
+        await user.save()
+        res.send(user.theme)
+    }
+    catch(e){
+        res.send(e)
+    }
+})
 
 module.exports = router

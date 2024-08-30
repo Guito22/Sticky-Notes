@@ -1,23 +1,25 @@
 import { DarkMode, LightMode} from "@mui/icons-material"
+import axios from "axios"
+import { useParams } from "react-router-dom"
 export default function ThemeSect(){
-    const changeTheme = ()=>{
-        const theme = localStorage.getItem("data-theme")
-        const circle = document.querySelector("#circle")
-        if(theme){
-            localStorage.setItem("data-theme",theme==="dark" ? "light": "dark")
-            document.body.setAttribute("data-theme",theme==="dark" ? "light": "dark")
-            if(theme==="light"){
-                circle.style.transform = "translateX(2rem)"
-            }
-            else{
-                circle.style.transform = "none"
+    const {id} = useParams()
+    const changeTheme = async()=>{
+        const res = await axios.patch(`http://localhost:3000/${id}/toggleTheme`,{},{withCredentials:true})
+        if(res.data==="light" || res.data==="dark"){
 
+            const theme = res.data
+            const circle = document.querySelector("#circle")
+            if(theme){
+                document.body.setAttribute("data-theme",theme)
+                if(theme==="dark"){
+                    circle.style.transform = "translateX(2rem)"
+                }
+                else{
+                    circle.style.transform = "none"
+                    
+                }
             }
-        }
-        else{
-            localStorage.setItem("data-theme","light")
-            document.body.setAttribute("data-theme","light")
-
+            
         }
     }
 
