@@ -13,6 +13,10 @@ router.get("/:userId",isLogged,async(req,res)=>{
         const {userId} = req.params
         if(req.session.user===userId){
             const user = await User.findById(userId).populate("boards")
+            for (let i = 0; i < user.boards.length; i++) {
+                user.boards[i] = await user.boards[i].populate("notes")
+                
+            }
             res.send(user)
         }
         else{
@@ -63,7 +67,6 @@ router.post("/signup", async (req,res)=>{
         const firstBoard = new Board({
             icon:"home",
             title:"My first board",
-            user:newUser
         })
         
         const firstNote = new Note({
@@ -71,7 +74,6 @@ router.post("/signup", async (req,res)=>{
             color:"blue",
             important:true,
             creationDate: new Date().toISOString(),
-            board:firstBoard
         })
         await firstNote.save()
         firstBoard.notes.push(firstNote)

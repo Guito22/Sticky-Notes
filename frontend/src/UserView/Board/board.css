@@ -59,7 +59,7 @@
 }
 
 .star{
-    color: goldenrod;
+    color: goldenrod !important;
     font-size: 2rem !important;
 }
 
@@ -72,4 +72,15 @@
     border-bottom-color: var(--board-bg);
     border-right-color: var(--board-bg);
     opacity: 1;
+}
+
+#addNoteDiv{
+    color: var(--body-color);
+
+}
+
+#addCircle{
+    color: rebeccapurple;
+    font-size: 3rem;
+
 }

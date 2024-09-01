@@ -10,6 +10,7 @@ const connectDB = require("./db");
 
 const userRoute = require("./Routes/user")
 const boardRoute = require("./Routes/board")
+const noteRoute = require("./Routes/note")
 
 
 // First, parse incoming JSON and URL-encoded data
@@ -32,6 +33,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use("/",userRoute)
 app.use("/",boardRoute)
+app.use("/",noteRoute)
 
 app.listen(port,()=>{
     console.log(`LISTENING TO PORT ${port}`);

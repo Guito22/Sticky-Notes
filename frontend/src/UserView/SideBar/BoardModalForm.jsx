@@ -1,6 +1,6 @@
 import { Book, CalendarMonth, Home, Lightbulb, RocketLaunch } from "@mui/icons-material"
 import { Modal,Box, IconButton, Button } from "@mui/material"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { userContext } from "../Context"
@@ -39,7 +39,13 @@ export default function BoardModalForm({openModal,SetOpenModal}){
         }
     ]
 
-    const createBoard = async()=>{
+    useEffect(()=>{
+        SetTitle("")
+        SetIconIndex(0)
+    },[openModal])
+
+    const createBoard = async(e)=>{
+        e.preventDefault()
         if(title){
             const res = await axios.post(`http://localhost:3000/${id}/newBoard`,
                 {title,icon:iconList[iconIndex].name},{withCredentials:true})
@@ -67,46 +73,56 @@ export default function BoardModalForm({openModal,SetOpenModal}){
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
       
-            <Box className="modalForm">
-                <h3 className="m-4">New Board</h3>
+            <Box >
+                <form onSubmit={createBoard} className="modalForm">
 
-                <label htmlFor="title">Title:</label>
-                
-                <input autoFocus value={title} onInput={updateTitle} type="text" name="title" id="title"/>
-                
-                <p>Icon:</p>
-                <div id="iconsDiv">
-                    {iconList.map((i,index)=>{
-                        return(
-                            <IconButton 
-                            key={index}
-                            onClick={()=>SetIconIndex(index)}
-                            className="iconButton"
-                            id={index===iconIndex ? "iconSelected":""}>
-                                {i.icon}
-                            </IconButton>
-                        )
-                    })}
-                </div>
+                    <h3 className="m-4">New Board</h3>
 
-                <div className="m-3 d-flex justify-content-end gap-2">
-                    <Button 
-                    color="success"
-                    style={{textTransform:"none"}}
-                    onClick={createBoard}
-                    variant="contained"
-                    >Create
-                    </Button>
-                    <Button 
+                    <label htmlFor="title">Title:</label>
                     
-                    style={{textTransform:"none",backgroundColor:"slategray"}}
-                    onClick={()=>{
-                        SetIconIndex(0)
-                        SetOpenModal(false)}}
-                    variant="contained"
-                    >Cancel</Button>
-                </div>
+                    <input 
+                    required 
+                    autoFocus 
+                    value={title} 
+                    onInput={updateTitle} 
+                    type="text" 
+                    name="title" 
+                    id="title"/>
+                    
+                    <p>Icon:</p>
+                    <div id="iconsDiv">
+                        {iconList.map((i,index)=>{
+                            return(
+                                <IconButton 
+                                key={index}
+                                onClick={()=>SetIconIndex(index)}
+                                className="iconButton"
+                                id={index===iconIndex ? "iconSelected":""}>
+                                    {i.icon}
+                                </IconButton>
+                            )
+                        })}
+                    </div>
 
+                    <div className="m-3 d-flex justify-content-end gap-2">
+                        <Button 
+                        color="success"
+                        type="submit"
+                        style={{textTransform:"none"}}
+                        variant="contained"
+                        >Create
+                        </Button>
+                        <Button 
+                        
+                        style={{textTransform:"none",backgroundColor:"slategray"}}
+                        onClick={()=>{
+                            SetIconIndex(0)
+                            SetOpenModal(false)}}
+                            variant="contained"
+                            >Cancel</Button>
+                    </div>
+
+                </form>
             </Box>
         </Modal> 
     )

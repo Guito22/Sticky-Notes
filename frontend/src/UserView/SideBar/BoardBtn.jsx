@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom"
 export default function BoardBtn({index,icon}){
     const {id} = useParams()
     const [open,SetOpen] = useState(false)
-    const {user,loadData,boardIndex,SetBoardIndex,SetOpenEditModal} = useContext(userContext)
+    const {user,loadData,boardIndex,SetBoardIndex,SetOpenEditModal,SetExpandedIndex} = useContext(userContext)
     const popoverOptions = {
         open,
         SetOpen,
@@ -34,6 +34,7 @@ export default function BoardBtn({index,icon}){
                             SetBoardIndex(index-1)
                         }
                         loadData()
+                        SetExpandedIndex(null)
                         
                     }
                 }
@@ -51,7 +52,9 @@ export default function BoardBtn({index,icon}){
             onContextMenu={(e)=>{
                 e.preventDefault()
                 SetOpen(true)}}
-            onClick={()=>{SetBoardIndex(index)}}>
+            onClick={()=>{
+                loadData()
+                SetBoardIndex(index)}}>
                 
                 {icon.icon}
                 <p>{user.boards && user.boards[index].title}</p>

@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Note from "./Note"
 import "./board.css"
 import ExpandedNote from "./ExpandedNote"
-import {notes} from "./notes"
-import { ArrowBack, ArrowBackSharp } from "@mui/icons-material"
+import { AddCircle } from "@mui/icons-material"
+import { userContext } from "../Context"
+import { IconButton } from "@mui/material"
 
 export default function Board(){
     const [draggedIndex,SetDraggedIndex] = useState(null)
-    const [expandedIndex,SetExpandedIndex] = useState(null)
+    const {user,boardIndex,SetOpenNoteModal,expandedIndex,SetExpandedIndex} = useContext(userContext)
     const dragStartFunction = (index)=>{
         SetDraggedIndex(index)
     }
@@ -26,28 +27,49 @@ export default function Board(){
 
         SetExpandedIndex(index)
     }
+    //to reset expanded view everytime a board is selected
+    useEffect(()=>{
+        SetExpandedIndex(null)
+        SetDraggedIndex(null)
+    },[boardIndex])
+
     return(
         <>
             <main id="board">
-                {expandedIndex!==null ? 
+                { expandedIndex!==null ? 
                     <ExpandedNote 
-                    info={notes[expandedIndex]}
+                    note={user.boards[boardIndex].notes[expandedIndex]}
+                    expandedIndex={expandedIndex}
                     SetExpandedIndex={SetExpandedIndex}/>    
                     :          
-                    notes.map((i,index)=>{
+                    user.boards && user.boards[boardIndex].notes.map((i,index)=>{
                         
                         return(
                             <Note
                             index={index} 
                             key={index}
-                            info={i}
+                            note={i}
                             dragStartFunction={dragStartFunction}
                             dragEndFunction={dragEndFunction}
                             dropFunction={dropFunction}
                             clickFunction={clickFunction}
                             />
                         )
-                    })}
+                    })
+                    
+                }
+                {/* if the board has no notes this is displayed */}
+                {user.boards && user.boards[boardIndex].notes.length===0
+                    && <div id="addNoteDiv" className="d-flex flex-column align-items-center justify-content-center">
+                        <h1>Create a note</h1>
+                        <IconButton
+                        onClick={()=>{
+                            SetOpenNoteModal(true)
+                        }}>
+                            <AddCircle id="addCircle"/>
+                        </IconButton>
+                    </div>
+                }   
                 
             </main>
         </>

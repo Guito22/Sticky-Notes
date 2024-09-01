@@ -1,5 +1,5 @@
 import { IconButton,Button} from "@mui/material";
-import {Brush, Delete, Edit, MoreHoriz} from "@mui/icons-material";
+import { Delete, Edit, MoreHoriz} from "@mui/icons-material";
 import { useContext, useState } from "react";
 import NoteModal from "./NoteModal";
 import PopoverMenu from "../../PopoverMenu"
@@ -12,7 +12,7 @@ export default function NavBar(){
   const {id} = useParams()
   const [open,SetOpen] = useState(false)
   const [openMenu,SetOpenMenu] = useState(false)
-  const {user,boardIndex,SetBoardIndex,SetOpenEditModal,loadData} = useContext(userContext)
+  const {user,boardIndex,SetBoardIndex,SetOpenEditModal,loadData,SetOpenNoteModal,SetExpandedIndex} = useContext(userContext)
   const popoverOptions = {
     open:openMenu,
     SetOpen:SetOpenMenu,
@@ -38,6 +38,7 @@ export default function NavBar(){
                 SetBoardIndex(boardIndex-1)
               }
               loadData()
+              SetExpandedIndex(null)
               SetOpenMenu(false)
           }
       }
@@ -52,15 +53,19 @@ export default function NavBar(){
               <span className="navbar-toggler-icon"></span>
             </button>
           </div>
-
-          <h2>{user.boards && user.boards[boardIndex].title}</h2>
-          
-          <Button id="addBtn" onClick={()=>{SetOpen(true)}}>+ Add Note</Button>
-          <IconButton id="moreBtn" onClick={()=>{SetOpenMenu(true)}}>
-              <MoreHoriz/>
-          </IconButton>
-          <NoteModal open={open} SetOpen={SetOpen}/>
-          <PopoverMenu options={popoverOptions}/>
+          {/* if there are no boards this won't be displayed */}
+          {user.boards && user.boards.length!==0 &&
+            <>
+              <h2>{user.boards && user.boards[boardIndex].title}</h2>
+              
+              <Button id="addBtn" onClick={()=>{SetOpenNoteModal(true)}}>+ Add Note</Button>
+              <IconButton id="moreBtn" onClick={()=>{SetOpenMenu(true)}}>
+                  <MoreHoriz/>
+              </IconButton>
+              <NoteModal/>
+              <PopoverMenu options={popoverOptions}/>
+            </>
+          }
 
         </nav>
     )

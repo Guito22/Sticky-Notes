@@ -18,7 +18,9 @@ export default function UserView(){
     const {id} = useParams()
     const [user,SetUser] = useState({})
     const [boardIndex,SetBoardIndex] = useState(0)
+    const [expandedIndex,SetExpandedIndex] = useState(null)
     const [openEditModal,SetOpenEditModal] = useState(false)
+    const [openNoteModal,SetOpenNoteModal] = useState(false)
     const [load,SetLoad] = useState(false)
     const loadData = ()=>{
         SetLoad(!load)
@@ -49,7 +51,9 @@ export default function UserView(){
 
     return(
         <userContext.Provider value={{
-            user,loadData,boardIndex,SetBoardIndex,openEditModal,SetOpenEditModal
+            user,loadData,boardIndex,SetBoardIndex,
+            openEditModal,SetOpenEditModal,openNoteModal,
+            SetOpenNoteModal,expandedIndex,SetExpandedIndex
             }}>
         
             <SideBar/>

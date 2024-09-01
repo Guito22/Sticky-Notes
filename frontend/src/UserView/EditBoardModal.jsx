@@ -51,7 +51,8 @@ export default function EditBoardModal(){
             
     },[openEditModal])
     
-    const updateBoard = async()=>{
+    const updateBoard = async(e)=>{
+        e.preventDefault()
         if(title){
             const res = await axios.patch(`http://localhost:3000/${id}/editBoard/${user.boards[boardIndex]._id}`,
                 {title,icon:iconList[iconIndex].name},{withCredentials:true})
@@ -73,46 +74,57 @@ export default function EditBoardModal(){
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
       
-            <Box className="modalForm">
-                <h3 className="m-4">Edit Board</h3>
+            <Box>
+                <form onSubmit={updateBoard} className="modalForm">
 
-                <label htmlFor="title">Title:</label>
-                
-                <input autoFocus value={title} onInput={updateTitle} type="text" name="title" id="title"/>
-                
-                <p>Icon:</p>
-                <div id="iconsDiv">
-                    {iconList.map((i,index)=>{
-                        return(
-                            <IconButton 
-                            key={index}
-                            onClick={()=>SetIconIndex(index)}
-                            className="iconButton"
-                            id={index===iconIndex ? "iconSelected":""}>
-                                {i.icon}
-                            </IconButton>
-                        )
-                    })}
-                </div>
+                    <h3 className="m-4">Edit Board</h3>
 
-                <div className="m-3 d-flex justify-content-end gap-2">
-                    <Button 
-                    color="secondary"
-                    style={{textTransform:"none"}}
-                    onClick={updateBoard}
-                    variant="contained"
-                    >Update
-                    </Button>
-                    <Button 
+                    <label htmlFor="title">Title:</label>
                     
-                    style={{textTransform:"none",backgroundColor:"slategray"}}
-                    onClick={()=>{
-                        SetIconIndex(0)
-                        SetOpenEditModal(false)}}
-                    variant="contained"
-                    >Cancel</Button>
-                </div>
+                    <input 
+                    required 
+                    autoFocus 
+                    value={title} 
+                    onInput={updateTitle} 
+                    type="text" 
+                    name="title" 
+                    id="title"/>
+                    
+                    <p>Icon:</p>
+                    <div id="iconsDiv">
+                        {iconList.map((i,index)=>{
+                            return(
+                                <IconButton 
+                                key={index}
+                                onClick={()=>SetIconIndex(index)}
+                                className="iconButton"
+                                id={index===iconIndex ? "iconSelected":""}>
+                                    {i.icon}
+                                </IconButton>
+                            )
+                        })}
+                    </div>
 
+                    <div className="m-3 d-flex justify-content-end gap-2">
+                        <Button 
+                        type="submit"
+                        color="secondary"
+                        style={{textTransform:"none"}}
+                        onClick={updateBoard}
+                        variant="contained"
+                        >Update
+                        </Button>
+                        <Button 
+                        
+                        style={{textTransform:"none",backgroundColor:"slategray"}}
+                        onClick={()=>{
+                            SetIconIndex(0)
+                            SetOpenEditModal(false)}}
+                            variant="contained"
+                            >Cancel</Button>
+                    </div>
+
+                </form>
             </Box>
         </Modal> 
     )
