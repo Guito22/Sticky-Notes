@@ -5,10 +5,14 @@ import ExpandedNote from "./ExpandedNote"
 import { AddCircle } from "@mui/icons-material"
 import { userContext } from "../Context"
 import { IconButton } from "@mui/material"
+import { useNavigate, useParams } from "react-router-dom"
+import axios from "axios"
+
 
 export default function Board(){
+    const {id} = useParams()
     const [draggedIndex,SetDraggedIndex] = useState(null)
-    const {user,boardIndex,SetOpenNoteModal,expandedIndex,SetExpandedIndex} = useContext(userContext)
+    const {user,loadData,boardIndex,SetOpenNoteModal,expandedIndex,SetExpandedIndex,SetOpenBoardModal} = useContext(userContext)
     const dragStartFunction = (index)=>{
         SetDraggedIndex(index)
     }
@@ -16,11 +20,13 @@ export default function Board(){
         SetDraggedIndex(null)
 
     }
-    const dropFunction = (index)=>{
-        const children = document.querySelector("main").children
-        const aux = children[draggedIndex].innerHTML
-        children[draggedIndex].innerHTML = children[index].innerHTML
-        children[index].innerHTML = aux
+    const dropFunction = async (index)=>{
+        const res = await axios.patch(`http://localhost:3000/${id}/${user.boards[boardIndex]._id}/${draggedIndex}/${index}`,
+            {},{withCredentials:true}
+        )
+        if(res.data=="success"){
+            loadData()
+        }
 
     }
     const clickFunction = (index)=>{
@@ -42,7 +48,7 @@ export default function Board(){
                     expandedIndex={expandedIndex}
                     SetExpandedIndex={SetExpandedIndex}/>    
                     :          
-                    user.boards && user.boards[boardIndex].notes.map((i,index)=>{
+                    user.boards && user.boards.length>0 && boardIndex!=null && user.boards[boardIndex].notes.map((i,index)=>{
                         
                         return(
                             <Note
@@ -59,7 +65,7 @@ export default function Board(){
                     
                 }
                 {/* if the board has no notes this is displayed */}
-                {user.boards && user.boards[boardIndex].notes.length===0
+                {user.boards && user.boards.length>0 && boardIndex!=null && user.boards[boardIndex].notes.length===0
                     && <div id="addNoteDiv" className="d-flex flex-column align-items-center justify-content-center">
                         <h1>Create a note</h1>
                         <IconButton
@@ -69,7 +75,18 @@ export default function Board(){
                             <AddCircle id="addCircle"/>
                         </IconButton>
                     </div>
-                }   
+                } 
+                {user.boards && user.boards.length==0 &&
+                    <div id="addNoteDiv" className="d-flex flex-column align-items-center justify-content-center">
+                        <h1>Create a Board</h1>
+                        <IconButton
+                        onClick={()=>{
+                            SetOpenBoardModal(true)
+                        }}>
+                            <AddCircle id="addCircle"/>
+                        </IconButton>
+                    </div>
+                }  
                 
             </main>
         </>

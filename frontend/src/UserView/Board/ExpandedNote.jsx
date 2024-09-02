@@ -1,4 +1,4 @@
-import { ArrowBack, CopyAllRounded, DeleteOutline, StarOutlineRounded, StarRounded } from "@mui/icons-material"
+import { ArrowBack, DeleteOutline, StarOutlineRounded, StarRounded } from "@mui/icons-material"
 import { Button, Checkbox, IconButton } from "@mui/material"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
@@ -102,11 +102,7 @@ export default function ExpandedNote({note}){
                 }
 
 
-                <IconButton
-                 className="m-2">
-                    <CopyAllRounded style={{color:"gray",fontSize:"2rem"}}/>
-                </IconButton>
-                <IconButton className="m-2">
+                <IconButton className="mx-2 my-0">
                     
                     <Checkbox 
                     name="important"
@@ -119,7 +115,7 @@ export default function ExpandedNote({note}){
 
                     
                 </IconButton>
-                <IconButton onClick={deleteNote} className="m-2">
+                <IconButton onClick={deleteNote} className="mx-2 my-0">
                     <DeleteOutline color="error" style={{fontSize:"2rem"}}/>
                 </IconButton>
             </div>

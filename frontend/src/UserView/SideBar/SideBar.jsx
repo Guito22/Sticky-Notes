@@ -4,9 +4,10 @@ import ProfileSect from "./ProfileSect"
 import ThemeSect from "./ThemeSect"
 import BoardsSect from "./BoardsSect"
 import BoardModalForm from "./BoardModalForm"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { userContext } from "../Context"
 export default function SideBar(){
-    const [openModal,SetOpenModal] = useState(false)
+    const {openBoardModal,SetOpenBoardModal} = useContext(userContext)
 
     return(
         <aside id="sideBar" className="offcanvas-lg offcanvas-start" tabIndex="-1">
@@ -14,11 +15,11 @@ export default function SideBar(){
             
             <Button id="addListBtn" data-bs-dismiss="offcanvas" data-bs-target="#sideBar"
             onClick={()=>{
-                SetOpenModal(true)
+                SetOpenBoardModal(true)
                 }}>
                 + Add Board
             </Button>
-            <BoardModalForm openModal={openModal} SetOpenModal={SetOpenModal}/>
+            <BoardModalForm openModal={openBoardModal} SetOpenModal={SetOpenBoardModal}/>
 
             <BoardsSect/>
 

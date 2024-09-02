@@ -5,7 +5,7 @@ import axios from "axios"
 import { userContext } from "../Context"
 import { useParams } from "react-router-dom"
 
-export default function BoardBtn({index,icon}){
+export default function BoardBtn({index,icon,dragStartFunction,dragEndFunction,dropFunction}){
     const {id} = useParams()
     const [open,SetOpen] = useState(false)
     const {user,loadData,boardIndex,SetBoardIndex,SetOpenEditModal,SetExpandedIndex} = useContext(userContext)
@@ -33,6 +33,9 @@ export default function BoardBtn({index,icon}){
                         if(index===(user.boards.length-1)){
                             SetBoardIndex(index-1)
                         }
+                        if(user.boards.length-1==0){
+                            SetBoardIndex(null)
+                        }
                         loadData()
                         SetExpandedIndex(null)
                         
@@ -48,14 +51,18 @@ export default function BoardBtn({index,icon}){
             <div
             id={boardIndex===index ? "selected" : ""}
             className="listBtn"
-            
+            draggable
+            onDragStart={()=>{dragStartFunction(index)}}
+            onDragEnd={dragEndFunction} 
+            onDragOver={(e)=>e.preventDefault()}
+            onDrop={()=>{dropFunction(index)}}
             onContextMenu={(e)=>{
                 e.preventDefault()
                 SetOpen(true)}}
             onClick={()=>{
                 loadData()
                 SetBoardIndex(index)}}>
-                
+            
                 {icon.icon}
                 <p>{user.boards && user.boards[index].title}</p>
             </div>

@@ -10,9 +10,8 @@ import axios from "axios";
 
 export default function NavBar(){
   const {id} = useParams()
-  const [open,SetOpen] = useState(false)
   const [openMenu,SetOpenMenu] = useState(false)
-  const {user,boardIndex,SetBoardIndex,SetOpenEditModal,loadData,SetOpenNoteModal,SetExpandedIndex} = useContext(userContext)
+  const {user,boardIndex,SetBoardIndex,SetOpenEditModal,loadData,SetOpenNoteModal,expandedIndex,SetExpandedIndex} = useContext(userContext)
   const popoverOptions = {
     open:openMenu,
     SetOpen:SetOpenMenu,
@@ -54,7 +53,7 @@ export default function NavBar(){
             </button>
           </div>
           {/* if there are no boards this won't be displayed */}
-          {user.boards && user.boards.length!==0 &&
+          {user.boards && expandedIndex==null && boardIndex!=null && user.boards.length!==0 &&
             <>
               <h2>{user.boards && user.boards[boardIndex].title}</h2>
               

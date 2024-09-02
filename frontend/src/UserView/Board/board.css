@@ -27,7 +27,7 @@
 }
 
 #expandedNote{
-    height: 90%;
+    height: 95%;
     background-color: var(--body-bg);
     color: var(--body-color);
     padding: 1rem 2rem;
@@ -36,8 +36,8 @@
     flex-direction: column;
     align-items: center;
     textarea{
-        width: 90%;
-        height: 80%;
+        width: 85%;
+        height: 100%;
         resize: none;
         border-radius: 10px;
         padding: 0.5rem;
@@ -57,6 +57,15 @@
         left:0.5rem
     }
 }
+#noteContent{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color:white;
+    font-size:1.5rem;
+    border:none;
+    resize:none;
+    cursor:pointer
+}
 
 .star{
     color: goldenrod !important;
@@ -72,6 +81,7 @@
     border-bottom-color: var(--board-bg);
     border-right-color: var(--board-bg);
     opacity: 1;
+    cursor: pointer;
 }
 
 #addNoteDiv{
@@ -84,3 +94,9 @@
     font-size: 3rem;
 
 }
+
+#snackbar .MuiSnackbarContent-root{
+    background-color: var(--popover-bg);
+    color: var(--body-color);
+    font-weight:bold
+  }

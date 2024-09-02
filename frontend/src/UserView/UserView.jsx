@@ -19,11 +19,21 @@ export default function UserView(){
     const [user,SetUser] = useState({})
     const [boardIndex,SetBoardIndex] = useState(0)
     const [expandedIndex,SetExpandedIndex] = useState(null)
+    const [openBoardModal,SetOpenBoardModal] = useState(false)
     const [openEditModal,SetOpenEditModal] = useState(false)
     const [openNoteModal,SetOpenNoteModal] = useState(false)
     const [load,SetLoad] = useState(false)
     const loadData = ()=>{
         SetLoad(!load)
+    }
+
+    const contextValues = {
+        user,loadData,
+        boardIndex,SetBoardIndex,
+        openBoardModal,SetOpenBoardModal,
+        openEditModal,SetOpenEditModal,
+        openNoteModal,SetOpenNoteModal,
+        expandedIndex,SetExpandedIndex,
     }
 
     const getUser = async()=>{
@@ -50,15 +60,11 @@ export default function UserView(){
 
 
     return(
-        <userContext.Provider value={{
-            user,loadData,boardIndex,SetBoardIndex,
-            openEditModal,SetOpenEditModal,openNoteModal,
-            SetOpenNoteModal,expandedIndex,SetExpandedIndex
-            }}>
+        <userContext.Provider value={contextValues}>
         
             <SideBar/>
             <section style={sectionStyle}>
-            <NavBar/>
+                <NavBar/>
                 <Board/>
             </section>
             <EditBoardModal/>

@@ -33,6 +33,24 @@ router.patch("/:userId/editNote/:noteId",isLogged,async(req,res)=>{
     }
 })
 
+router.patch("/:userId/:boardId/:noteIndex1/:noteIndex2",isLogged,async(req,res)=>{
+    try{
+
+        const {boardId,noteIndex1,noteIndex2} = req.params
+        const board = await Board.findById(boardId)
+        if(board.notes[noteIndex1] && board.notes[noteIndex2]){
+            const aux = board.notes[noteIndex1]
+            board.notes[noteIndex1] = board.notes[noteIndex2]
+            board.notes[noteIndex2] = aux
+        }
+        await board.save()
+        res.send("success")
+    }
+    catch(e){
+        res.send(e)
+    }
+})
+
 router.delete("/:userId/:boardId/deleteNote/:noteId",isLogged,async(req,res)=>{
     try{
 
