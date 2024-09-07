@@ -28,7 +28,7 @@ export default function ExpandedNote({note}){
     const updateNote = async (e)=>{
         e.preventDefault()
         if(formData.content){
-            const res = await axios.patch(`http://localhost:3000/${id}/editNote/${note._id}`,
+            const res = await axios.patch(`http://localhost:3000/${id}/${note._id}`,
                 formData,{withCredentials:true})
             if(res.data==="success"){
                 SetExpandedIndex(null)
@@ -61,7 +61,9 @@ export default function ExpandedNote({note}){
         className="card col-11" 
         id="expandedNote">
 
-            <IconButton id="returnBtn" onClick={()=>{SetExpandedIndex(null)}}>
+            <IconButton 
+            id="returnBtn" 
+            onClick={()=>SetExpandedIndex(null)}>
                 <ArrowBack/>
             </IconButton>
             
@@ -115,11 +117,23 @@ export default function ExpandedNote({note}){
 
                     
                 </IconButton>
-                <IconButton onClick={deleteNote} className="mx-2 my-0">
-                    <DeleteOutline color="error" style={{fontSize:"2rem"}}/>
+
+                <IconButton 
+                onClick={deleteNote} 
+                className="mx-2 my-0">
+
+                    <DeleteOutline 
+                    color="error" 
+                    style={{fontSize:"2rem"}}/>
+
                 </IconButton>
+
             </div>
-            <Button type="submit" color="secondary" variant="contained">
+            
+            <Button 
+            type="submit" 
+            color="secondary" 
+            variant="contained">
                 Save
             </Button>
         </form>

@@ -10,13 +10,22 @@
     background-color: gray;
 }
 
-#boardNav h2{
+#navTitle{
     margin-left: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
 }
+
 
 @media screen and (max-width:992px){
     #boardNav h2{
         margin-left: 0;
+    }
+}
+@media screen and (max-width:650px){
+    #boardNav h2{
+        width: 40%;
     }
 }
 

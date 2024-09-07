@@ -9,6 +9,7 @@ export default function EditBoardModal(){
     const {id} = useParams()
     const {user,loadData,boardIndex,openEditModal,SetOpenEditModal} = useContext(userContext)
     const [title,SetTitle] = useState("")
+    
     const updateTitle = (e)=>{
         if(e.target.value.length<=30){
 
@@ -121,7 +122,9 @@ export default function EditBoardModal(){
                             SetIconIndex(0)
                             SetOpenEditModal(false)}}
                             variant="contained"
-                            >Cancel</Button>
+                        >
+                            Cancel
+                        </Button>
                     </div>
 
                 </form>

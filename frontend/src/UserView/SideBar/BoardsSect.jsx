@@ -4,17 +4,21 @@ import {userContext} from "../Context"
 import { Book, CalendarMonth, Home, Lightbulb, RocketLaunch } from "@mui/icons-material"
 import axios from "axios"
 import { useParams } from "react-router-dom"
+
 export default function BoardsSect(){
     const {id} = useParams()
     const {user,loadData} = useContext(userContext)
     const [draggedIndex,SetDraggedIndex] = useState(null)
+
     const dragStartFunction = (index)=>{
         SetDraggedIndex(index)
     }
+
     const dragEndFunction = ()=>{
         SetDraggedIndex(null)
 
     }
+
     const dropFunction = async (index)=>{
         const res = await axios.patch(`http://localhost:3000/${id}/${draggedIndex}/${index}`,
             {},{withCredentials:true}
@@ -46,6 +50,7 @@ export default function BoardsSect(){
             icon:<CalendarMonth style={{color:"salmon",margin:"1rem"}}/>
         }
     ]
+    
     return(
         <div id="listsDiv">
             {user.boards && user.boards.length>0 && user.boards.map((i,index)=>

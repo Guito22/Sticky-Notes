@@ -5,14 +5,15 @@ import SideBar from "./SideBar/SideBar"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { userContext } from "./Context"
-
 import EditBoardModal from "./EditBoardModal"
+
 const sectionStyle = {
     display:"flex",
     flexDirection:"column",
     flex:"12",
     height:"100vh"
 }
+
 export default function UserView(){
     const navigate = useNavigate()
     const {id} = useParams()
@@ -53,21 +54,22 @@ export default function UserView(){
         }
     }
 
-
     useEffect(()=>{
         getUser()
     },[load])
-
 
     return(
         <userContext.Provider value={contextValues}>
         
             <SideBar/>
+
             <section style={sectionStyle}>
                 <NavBar/>
                 <Board/>
             </section>
+
             <EditBoardModal/>
+
         </userContext.Provider>
     )
 }

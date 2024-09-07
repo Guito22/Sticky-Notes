@@ -14,8 +14,7 @@ export default function Note({index,note,dragStartFunction,dragEndFunction,dropF
     const [openSnackBar,SetOpenSnackBar] = useState(false)
 
     const toggleImportant = async(e)=>{
-        
-        const res = await axios.patch(`http://localhost:3000/${id}/editNote/${note._id}`,
+        const res = await axios.patch(`http://localhost:3000/${id}/${note._id}`,
             {important:!e.target.checked},{withCredentials:true})
         if(res.data==="success"){
             loadData()
@@ -41,25 +40,30 @@ export default function Note({index,note,dragStartFunction,dragEndFunction,dropF
         onDragOver={(e)=>e.preventDefault()}
         onDrop={()=>{dropFunction(index)}}
         style={{backgroundColor:note.color,color:"white"}}
-        className="card col-10 col-md-5 h-50 d-flex flex-column" 
+        className="card note col-10 col-md-5 h-50 d-flex flex-column" 
         aria-hidden="true" 
         draggable="true"
         >
+
             <textarea 
             readOnly 
             onClick={()=>{clickFunction(index)}} 
             className="p-4 h-75" 
             id="noteContent"
-            style={{backgroundColor:note.color}}
-            value={note.content}
-            >
+            style={{backgroundColor:"transparent"}}
+            value={note.content}>
             </textarea>
+
             <div className="h-25 d-flex align-items-center justify-content-start">
+                
                 <IconButton
                 onClick={copyNote}
-                 className="m-2">
-                    <CopyAllRounded style={{color:"gray",fontSize:"2rem"}}/>
+                className="m-2">
+                    <CopyAllRounded 
+                    className="copy" 
+                    style={{color:"gray",fontSize:"2rem"}}/>
                 </IconButton>
+
                 <Checkbox className="m-2"
                     name="important"
                     id="important"
@@ -67,8 +71,10 @@ export default function Note({index,note,dragStartFunction,dragEndFunction,dropF
                     checked={note.important}
                     checkedIcon={<StarRounded className="star"/>} 
                     icon={<StarOutlineRounded className="star"/>}
-                    />
+                />
+
             </div>
+
             <div 
             onClick={()=>{clickFunction(index)}}
             className="fold"
@@ -79,11 +85,11 @@ export default function Note({index,note,dragStartFunction,dragEndFunction,dropF
             >
 
             </div>
+
             <Snackbar 
             onClose={()=>{SetOpenSnackBar(false)}} 
             autoHideDuration={1000} 
             open={openSnackBar} 
-
             id="snackbar"
             message="Text copied to clipboard"/>
 

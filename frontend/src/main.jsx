@@ -14,8 +14,10 @@ import Edit from './Authentication/Edit';
 import ErrorPage from './ErrorPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+
   <BrowserRouter>
     <Routes>
+
       <Route path='/' element={<Layout/>}>
         
         <Route index element={<Home/>}></Route>
@@ -25,7 +27,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/*' element={<ErrorPage/>}></Route>
 
       </Route>
+
       <Route path='/user/:id' element={<UserView/>}></Route>
+      
     </Routes>
   </BrowserRouter>
 )

@@ -20,10 +20,10 @@ router.post("/:userId/:boardId/newNote",isLogged,async(req,res)=>{
         res.send(e)
     }
 })
-router.patch("/:userId/editNote/:noteId",isLogged,async(req,res)=>{
+router.patch("/:userId/:noteId",isLogged,async(req,res)=>{
     try{
         const {noteId} = req.params
-        await Note.findByIdAndUpdate(noteId,
+        const note = await Note.findByIdAndUpdate(noteId,
             {...req.body,editionDate:new Date().toISOString()}
         )
         res.send("success")
@@ -35,7 +35,6 @@ router.patch("/:userId/editNote/:noteId",isLogged,async(req,res)=>{
 
 router.patch("/:userId/:boardId/:noteIndex1/:noteIndex2",isLogged,async(req,res)=>{
     try{
-
         const {boardId,noteIndex1,noteIndex2} = req.params
         const board = await Board.findById(boardId)
         if(board.notes[noteIndex1] && board.notes[noteIndex2]){

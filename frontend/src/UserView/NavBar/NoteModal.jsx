@@ -14,6 +14,7 @@ export default function NoteModal(){
         color:colors[colorIndex],
         important:false
     })
+    
     const handleInput = (e)=>{
         const {name,value,checked} = e.target
         if(name==="important"){
@@ -39,6 +40,7 @@ export default function NoteModal(){
             
         }
     }
+
     useEffect(()=>{
         SetFormData({
             content:"",

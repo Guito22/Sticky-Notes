@@ -10,12 +10,13 @@ export default function BoardModalForm({openModal,SetOpenModal}){
     const [iconIndex,SetIconIndex] = useState(0)
     const [title,SetTitle] = useState("")
     const {user,loadData,SetBoardIndex} = useContext(userContext)
+
     const updateTitle = (e)=>{
         if(e.target.value.length<=30){
-
             SetTitle(e.target.value)
         }
     }
+
     const iconList = [
         {
             name:"home",
@@ -74,7 +75,9 @@ export default function BoardModalForm({openModal,SetOpenModal}){
         aria-describedby="modal-modal-description">
       
             <Box >
-                <form onSubmit={createBoard} className="modalForm">
+                <form 
+                onSubmit={createBoard} 
+                className="modalForm">
 
                     <h3 className="m-4">New Board</h3>
 
@@ -90,6 +93,7 @@ export default function BoardModalForm({openModal,SetOpenModal}){
                     id="title"/>
                     
                     <p>Icon:</p>
+                    
                     <div id="iconsDiv">
                         {iconList.map((i,index)=>{
                             return(
@@ -105,6 +109,7 @@ export default function BoardModalForm({openModal,SetOpenModal}){
                     </div>
 
                     <div className="m-3 d-flex justify-content-end gap-2">
+                        
                         <Button 
                         color="success"
                         type="submit"
@@ -112,14 +117,17 @@ export default function BoardModalForm({openModal,SetOpenModal}){
                         variant="contained"
                         >Create
                         </Button>
+
                         <Button 
-                        
                         style={{textTransform:"none",backgroundColor:"slategray"}}
                         onClick={()=>{
                             SetIconIndex(0)
                             SetOpenModal(false)}}
                             variant="contained"
-                            >Cancel</Button>
+                        >
+                            Cancel
+                        </Button>
+
                     </div>
 
                 </form>

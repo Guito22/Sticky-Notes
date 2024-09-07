@@ -14,7 +14,7 @@
 
 }
 
-.card{
+.note{
     margin: 2%;
     position: relative;
     border: none !important;
@@ -32,7 +32,7 @@
     color: var(--body-color);
     padding: 1rem 2rem;
     display: flex;
-    border-radius: 20px;
+    border-radius: 10px;
     flex-direction: column;
     align-items: center;
     textarea{
@@ -67,6 +67,10 @@
     cursor:pointer
 }
 
+.copy:active{
+    color: cyan !important;
+}
+
 .star{
     color: goldenrod !important;
     font-size: 2rem !important;
@@ -99,4 +103,4 @@
     background-color: var(--popover-bg);
     color: var(--body-color);
     font-weight:bold
-  }
+}

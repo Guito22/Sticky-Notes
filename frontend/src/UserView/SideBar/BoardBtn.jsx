@@ -1,4 +1,4 @@
-import { Delete, Edit, ListAlt} from "@mui/icons-material"
+import { Delete, DeleteOutlineOutlined, Edit, EditNoteOutlined, ListAlt} from "@mui/icons-material"
 import { useContext, useState } from "react"
 import PopoverMenu from "../../PopoverMenu"
 import axios from "axios"
@@ -16,7 +16,7 @@ export default function BoardBtn({index,icon,dragStartFunction,dragEndFunction,d
         anchorOrigin:{horizontal:0,vertical:"bottom"},
         content:[
             {
-                icon:<Edit/>,
+                icon:<EditNoteOutlined/>,
                 text:"Edit Board",
                 action:()=>{
                     SetOpenEditModal(true)
@@ -25,10 +25,11 @@ export default function BoardBtn({index,icon,dragStartFunction,dragEndFunction,d
                 }
             },
             {
-                icon:<Delete/>,
+                icon:<DeleteOutlineOutlined/>,
                 text:"Delete Board",
                 action: async()=>{
                     const res = await axios.delete(`http://localhost:3000/${id}/deleteBoard/${user.boards[index]._id}`,{withCredentials:true})
+                    
                     if(res.data==="success"){
                         if(index===(user.boards.length-1)){
                             SetBoardIndex(index-1)
@@ -36,6 +37,7 @@ export default function BoardBtn({index,icon,dragStartFunction,dragEndFunction,d
                         if(user.boards.length-1==0){
                             SetBoardIndex(null)
                         }
+                        
                         loadData()
                         SetExpandedIndex(null)
                         
@@ -58,13 +60,16 @@ export default function BoardBtn({index,icon,dragStartFunction,dragEndFunction,d
             onDrop={()=>{dropFunction(index)}}
             onContextMenu={(e)=>{
                 e.preventDefault()
-                SetOpen(true)}}
+                SetOpen(true)}
+            }
             onClick={()=>{
                 loadData()
-                SetBoardIndex(index)}}>
+                SetBoardIndex(index)}
+            }>
             
                 {icon.icon}
                 <p>{user.boards && user.boards[index].title}</p>
+
             </div>
             <PopoverMenu options={popoverOptions}/>
         </>

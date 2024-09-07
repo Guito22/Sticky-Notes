@@ -13,13 +13,16 @@ export default function Board(){
     const {id} = useParams()
     const [draggedIndex,SetDraggedIndex] = useState(null)
     const {user,loadData,boardIndex,SetOpenNoteModal,expandedIndex,SetExpandedIndex,SetOpenBoardModal} = useContext(userContext)
+    
     const dragStartFunction = (index)=>{
         SetDraggedIndex(index)
     }
+    
     const dragEndFunction = ()=>{
         SetDraggedIndex(null)
 
     }
+    
     const dropFunction = async (index)=>{
         const res = await axios.patch(`http://localhost:3000/${id}/${user.boards[boardIndex]._id}/${draggedIndex}/${index}`,
             {},{withCredentials:true}
@@ -29,6 +32,7 @@ export default function Board(){
         }
 
     }
+    
     const clickFunction = (index)=>{
 
         SetExpandedIndex(index)
@@ -78,7 +82,9 @@ export default function Board(){
                 } 
                 {user.boards && user.boards.length==0 &&
                     <div id="addNoteDiv" className="d-flex flex-column align-items-center justify-content-center">
+                        
                         <h1>Create a Board</h1>
+                        
                         <IconButton
                         onClick={()=>{
                             SetOpenBoardModal(true)
