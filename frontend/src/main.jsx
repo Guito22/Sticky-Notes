@@ -15,7 +15,7 @@ import ErrorPage from './ErrorPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
-  <BrowserRouter>
+  <BrowserRouter basename='/Sticky-Notes'>
     <Routes>
 
       <Route path='/' element={<Layout/>}>
