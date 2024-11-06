@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 
+const uri = "mongodb+srv://diego:c9ItNN0WtfN1qt9w@note-project.yue63.mongodb.net/?retryWrites=true&w=majority&appName=Note-project";
+
+
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/StickyNotes');
+    await mongoose.connect(uri)
     console.log("MONGOOSE CONNECTION OPEN");
 }
 

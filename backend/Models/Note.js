@@ -22,7 +22,6 @@ const noteSchema = new Schema({
     },
     editionDate:{
         type:Date,
-        required:true
     },
 
 })
