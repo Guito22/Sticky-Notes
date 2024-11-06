@@ -15,6 +15,5 @@
   "scripts": {
     "start": "node index.js",
     "build": "npm install",
-    "postinstall": "npm rebuild bcrypt"
   }
 }
