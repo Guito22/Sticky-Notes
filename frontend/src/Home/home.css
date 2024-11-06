@@ -1,0 +1,30 @@
+
+#homeNote{
+    width: 75vh;
+    height: 75vh;
+    background-color: yellow;
+    border-radius: 10px;
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+@media screen and (max-width:768px){
+    #homeNote{
+        width: 40vh;
+        height: 40vh;
+    }
+}
+
+#homeFold{
+    position: absolute;
+    border: 25px solid transparent;
+    border-top-left-radius: 10px;
+    border-top-color: goldenrod;
+    border-left-color: goldenrod;
+    bottom: 0;
+    right: 0;
+}

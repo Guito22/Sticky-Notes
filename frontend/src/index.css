@@ -1,0 +1,18 @@
+@import url(./vars.css);
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#root{
+    background-color: var(--body-bg);
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    transition: 0.1s background-color ease-in,0.1s color ease-in;
+}
+
+textarea:focus, input:focus{
+    outline: none !important;
+}

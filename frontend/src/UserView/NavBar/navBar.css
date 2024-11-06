@@ -1,0 +1,91 @@
+#boardNav{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: var(--body-color);
+    background-color: var(--board-bg);
+}
+#toggleBtn{
+    background-color: gray;
+}
+
+#navTitle{
+    margin-left: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
+}
+
+
+@media screen and (max-width:992px){
+    #boardNav h2{
+        margin-left: 0;
+    }
+}
+@media screen and (max-width:650px){
+    #boardNav h2{
+        width: 40%;
+    }
+}
+
+#addBtn{
+    background-color: rebeccapurple;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 7.5px 15px;
+    position: absolute;
+    right: 60px;
+    text-transform: none;
+}
+
+#moreBtn{
+    position: absolute;
+    right: 10px;
+    svg{
+        color: var(--body-color);
+    }
+}
+
+#modalBox{
+    width:50vw;
+    height: 500px;
+    background-color: var(--body-bg) !important;
+    margin: 3rem auto;
+    border-radius: 10px;
+}
+
+#contentNote{
+    resize: none;
+    border-radius: 10px;
+    width: 75%;
+    height: 300px;
+    margin: 2rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    color: white;
+    &::placeholder{
+        color: lightgray;
+    }
+}
+@media screen and (max-width:992px) {
+    #contentNote{
+        height: 200px;
+        font-size: 1rem;
+    }
+}
+
+.colorCircle{
+    border-radius: 100%;
+    margin: 1rem;
+    border: 3px solid transparent;
+    width: 2rem;
+    height: 2rem;
+    background-repeat: repeat !important;
+}
+
+#selectedColor{
+    outline: 5px solid cyan;
+}

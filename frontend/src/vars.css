@@ -1,0 +1,19 @@
+:root{
+    --body-bg:whitesmoke;
+    --board-bg:rgb(188, 185, 185);
+    --body-color:black;
+    --list-name-color:black;
+    --popover-bg:#eeeeee;
+    --input-bg:#eeeeee;
+    --input-color:black;
+}
+
+[data-theme="dark"]{
+    --body-bg:#252525;
+    --board-bg:#111;
+    --body-color:whitesmoke;
+    --list-name-color:whitesmoke;
+    --popover-bg:#383737;
+    --input-bg:#383737;
+    --input-color:whitesmoke;
+}
